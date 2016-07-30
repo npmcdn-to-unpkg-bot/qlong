@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="qlong:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="qlong.war">
+      <element id="artifact" artifact-name="qlong:war exploded" />
+    </root>
+  </artifact>
+</component>
