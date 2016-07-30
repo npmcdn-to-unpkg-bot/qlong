@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qlong.dao.INovelMapper">
+
+
+    <sql id="novelSql">
+        id,name,author
+    </sql>
+
+    <select id="getNovelById" parameterType="int" resultType="com.qlong.model.Novel">
+        SELECT
+        <include refid="novelSql"/>
+        from t_novel where id = #{id}
+    </select>
+
+    <insert id="insertNovel" useGeneratedKeys="true" keyProperty="java.lang.Integer" keyColumn="id">
+        insert into t_novel(id,name,author) values(#{id},#{name},#{author});
+    </insert>
+
+
+</mapper>

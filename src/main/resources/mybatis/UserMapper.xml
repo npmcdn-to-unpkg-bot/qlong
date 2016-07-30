@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qlong.dao.IUserMapper">
+
+    <sql id="userSql">
+        id,email,name,date
+    </sql>
+    <select id="getUserById" resultType="com.qlong.model.User" parameterType="int">
+        SELECT
+        <include refid="userSql"/>
+        from t_user where id = #{id}
+    </select>
+
+
+</mapper>
