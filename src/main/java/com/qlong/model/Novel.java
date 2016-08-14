@@ -1,5 +1,7 @@
 package com.qlong.model;
 
+import java.util.List;
+
 /**
  * Created by qianlong on 2016/7/22.
  */
@@ -7,6 +9,7 @@ public class Novel {
     private int id;
     private String name;
     private String author;
+    private List<Chapter> chapters;
 
     public int getId() {
         return id;
@@ -30,5 +33,13 @@ public class Novel {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public List<Chapter> getChapters() {
+        return chapters;
+    }
+
+    public void setChapters(List<Chapter> chapters) {
+        this.chapters = chapters;
     }
 }

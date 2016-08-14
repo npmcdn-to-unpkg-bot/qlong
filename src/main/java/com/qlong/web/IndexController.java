@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by qianlong on 2016/7/21.
@@ -49,11 +51,8 @@ public class IndexController {
     @RequestMapping("/novel/{id}")
     public Novel getNovel(@PathVariable("id") int id){
         Novel novel = novelMapper.getNovelById(id);
-        Novel n = new Novel();
-        n.setName("test2");
-        n.setAuthor("liqianlong");
-        int i = novelMapper.insertNovel(n);
-        System.out.println(i);
+        List<Chapter> chapters = chapterMapper.getChapterByNovelId(id);
+        novel.setChapters(chapters);
         return novel;
     }
 
@@ -61,11 +60,6 @@ public class IndexController {
     @RequestMapping("/chapter/{id}")
     public Chapter getChapter(@PathVariable("id") int id){
         Chapter chapter = chapterMapper.getChapterById(id);
-        Chapter c = new Chapter();
-        c.setNovelId(1);
-        c.setChapterName("aaa");
-        c.setContent("信息信息");
-        chapterMapper.insertChapter(c);
         return chapter;
     }
 
@@ -85,11 +79,16 @@ public class IndexController {
         Pagtion<Chapter> pagtion = chapterService.getChapterPage(Integer.valueOf(novelId),Integer.valueOf(pageSize),Integer.valueOf(pageNo));
         return pagtion;
     }
+
     @RequestMapping("/chapter/{novelId}/{chapterId}")
     public ModelAndView getChapter(@PathVariable("novelId") int novelId,@PathVariable("chapterId") int chapterId){
         Chapter chapter = chapterMapper.getChapterById(chapterId);
 
-        return new ModelAndView("chapter","chapter",chapter);
+
+
+        Map<String,Object>  map = new HashMap<String, Object>();
+        map.put("chapter",chapter);
+        return new ModelAndView("chapter",map);
     }
 
 
